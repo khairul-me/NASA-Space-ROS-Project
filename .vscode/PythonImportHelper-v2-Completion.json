@@ -1,0 +1,78 @@
+[
+    {
+        "label": "rclpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "rclpy",
+        "description": "rclpy",
+        "detail": "rclpy",
+        "documentation": {}
+    },
+    {
+        "label": "Node",
+        "importPath": "rclpy.node",
+        "description": "rclpy.node",
+        "isExtraImport": true,
+        "detail": "rclpy.node",
+        "documentation": {}
+    },
+    {
+        "label": "Twist",
+        "importPath": "geometry_msgs.msg",
+        "description": "geometry_msgs.msg",
+        "isExtraImport": true,
+        "detail": "geometry_msgs.msg",
+        "documentation": {}
+    },
+    {
+        "label": "LaunchDescription",
+        "importPath": "launch",
+        "description": "launch",
+        "isExtraImport": true,
+        "detail": "launch",
+        "documentation": {}
+    },
+    {
+        "label": "Node",
+        "importPath": "launch_ros.actions",
+        "description": "launch_ros.actions",
+        "isExtraImport": true,
+        "detail": "launch_ros.actions",
+        "documentation": {}
+    },
+    {
+        "label": "ExecuteProcess",
+        "importPath": "launch.actions",
+        "description": "launch.actions",
+        "isExtraImport": true,
+        "detail": "launch.actions",
+        "documentation": {}
+    },
+    {
+        "label": "RoverControlNode",
+        "kind": 6,
+        "importPath": "Control_Node",
+        "description": "Control_Node",
+        "peekOfCode": "class RoverControlNode(Node):\n    def __init__(self):\n        super().__init__('rover_control_node')\n        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)\n        timer_period = 0.5  # seconds\n        self.timer = self.create_timer(timer_period, self.move_rover)\n        self.velocity_msg = Twist()\n    def move_rover(self):\n        # Send velocity commands to move the rover forward\n        self.velocity_msg.linear.x = 0.5  # Forward velocity",
+        "detail": "Control_Node",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "Control_Node",
+        "description": "Control_Node",
+        "peekOfCode": "def main(args=None):\n    rclpy.init(args=args)\n    node = RoverControlNode()\n    rclpy.spin(node)\n    node.destroy_node()\n    rclpy.shutdown()\nif __name__ == '__main__':\n    main()",
+        "detail": "Control_Node",
+        "documentation": {}
+    },
+    {
+        "label": "generate_launch_description",
+        "kind": 2,
+        "importPath": "ROS2_Launch",
+        "description": "ROS2_Launch",
+        "peekOfCode": "def generate_launch_description():\n    return LaunchDescription([\n        # Launch Gazebo with the rover model\n        ExecuteProcess(\n            cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so'],\n            output='screen'),\n        # Start the control node\n        Node(\n            package='my_rover_package',\n            executable='rover_control_node',",
+        "detail": "ROS2_Launch",
+        "documentation": {}
+    }
+]
