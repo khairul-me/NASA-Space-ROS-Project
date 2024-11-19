@@ -1,2 +1,0 @@
-# Nasa_ROS_2024
-NASA ROS 2024
